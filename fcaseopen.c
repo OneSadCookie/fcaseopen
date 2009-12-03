@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "fcaseopen.h"
 
 #if !defined(_WIN32)
 #include <stdlib.h>
@@ -7,9 +7,6 @@
 #include <dirent.h>
 #include <errno.h>
 #include <unistd.h>
-#endif
-
-#include "fcaseopen.h"
 
 // r must have strlen(path) + 2 bytes
 static int casepath(char const *path, char *r)
@@ -82,6 +79,7 @@ static int casepath(char const *path, char *r)
     if (d) closedir(d);
     return 1;
 }
+#endif
 
 FILE *fcaseopen(char const *path, char const *mode)
 {
