@@ -30,18 +30,11 @@ static int casepath(char const *path, char *r)
         rl = 1;
     }
     
-    int last = 0;
     char *c = strsep(&p, "/");
     while (c)
     {
         if (!d)
         {
-            return 0;
-        }
-        
-        if (last)
-        {
-            closedir(d);
             return 0;
         }
         
@@ -70,7 +63,9 @@ static int casepath(char const *path, char *r)
         {
             strcpy(r + rl, c);
             rl += strlen(c);
-            last = 1;
+
+            if(d) closedir(d);
+            return 0;
         }
         
         c = strsep(&p, "/");
